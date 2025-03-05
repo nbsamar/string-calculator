@@ -7,8 +7,15 @@ class StringCalculator
     delimiter = ","
     if numbers.start_with?("//")
       parts = numbers.split("\n", 2)
-      delimiter = parts[0][2]
+
+      if parts[0].include?("[")
+        delimiters = parts[0].scan(/\[(.*?)\]/).flatten
+      else
+        delimiters = [parts[0][2]]
+      end
+
       numbers = parts[1]
+      delimiters.each { |delim| numbers.gsub!(delim, ",") }
     end
 
     number_array = numbers.gsub(/\n/, delimiter).split(delimiter).map(&:to_i)

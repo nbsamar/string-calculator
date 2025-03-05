@@ -39,5 +39,10 @@ RSpec.describe StringCalculator do
       expect(StringCalculator.add("1000,999")).to eq(1999) # <= 1000 is a acceptable case according to Kata.
       expect(StringCalculator.add("1001,1002,5")).to eq(5)
     end
+
+    it 'supports delimiters of any length' do
+      expect(StringCalculator.add("//[***]\n1***2***3")).to eq(6)
+      expect(StringCalculator.add("//[###]\n4###5###6")).to eq(15)
+    end
   end
 end
