@@ -4,6 +4,6 @@ class StringCalculator
 
     return numbers.to_i if numbers.length == 1
 
-    numbers.split(',').map(&:to_i).reduce(:+)
+    numbers.gsub(/\n/, ',').split(',').map(&:to_i).reduce(:+)
   end
 end
