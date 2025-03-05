@@ -2,8 +2,6 @@ class StringCalculator
   def self.add(numbers)
     return 0 if numbers.empty?
 
-    return numbers.to_i if numbers.length == 1
-
     numbers.gsub(/\n/, ',').split(',').map(&:to_i).reduce(:+)
 
     delimiter = ","
@@ -13,6 +11,12 @@ class StringCalculator
       numbers = parts[1]
     end
 
-    numbers.gsub(/\n/, delimiter).split(delimiter).map(&:to_i).reduce(:+)
+    number_array = numbers.gsub(/\n/, delimiter).split(delimiter).map(&:to_i)
+    negative_numbers = number_array.select { |num| num < 0 }
+    if negative_numbers.any?
+      raise "negative numbers not allowed: #{negative_numbers.join(',')}"
+    end
+
+    number_array.reduce(:+)
   end
 end
