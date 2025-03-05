@@ -12,6 +12,7 @@ class StringCalculator
     end
 
     number_array = numbers.gsub(/\n/, delimiter).split(delimiter).map(&:to_i)
+    number_array.reject! { |num| num > 1000 }
     negative_numbers = number_array.select { |num| num < 0 }
     if negative_numbers.any?
       raise "negative numbers not allowed: #{negative_numbers.join(',')}"

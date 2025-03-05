@@ -33,5 +33,11 @@ RSpec.describe StringCalculator do
     it 'should raise an exception for multiple negative numbers' do
       expect { StringCalculator.add("1,-2,-3") }.to raise_error("negative numbers not allowed: -2,-3")
     end
+
+    it 'ignores numbers greater than 1000' do
+      expect(StringCalculator.add("2,1001")).to eq(2)
+      expect(StringCalculator.add("1000,999")).to eq(1999) # <= 1000 is a acceptable case according to Kata.
+      expect(StringCalculator.add("1001,1002,5")).to eq(5)
+    end
   end
 end
