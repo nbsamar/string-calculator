@@ -56,5 +56,11 @@ RSpec.describe StringCalculator do
       expect(StringCalculator.add("//[###][@@@@]\n4###5@@@@6")).to eq(15)
       expect(StringCalculator.add("//[!!][???]\n10!!20???30")).to eq(60)
     end
+
+    it 'adds only odd numbers if delimiter is o' do
+      expect(StringCalculator.add("//[o]\n1o2o3")).to eq(4)
+      expect(StringCalculator.add("//[o]\n2o2o4")).to eq(0)
+      expect(StringCalculator.add("//[o]\n2o2o9o11")).to eq(20)
+    end
   end
 end
